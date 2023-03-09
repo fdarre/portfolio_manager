@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import AssetOverview from "./components/AssetOverview";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import './App.css';
 
 function App() {
@@ -17,7 +19,9 @@ function App() {
     //render
       return (
         <div className="App">
+            <Navbar />
             <AssetOverview name="Ethereum" symbol="ETH" price={fetchedPrice} />
+            <Footer />
          </div>
       );
 }
