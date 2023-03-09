@@ -6,13 +6,22 @@ import AssetTableLine from "./AssetTableLine";
 
 const AssetOverview: FunctionComponent = () => {
 
-    //Get price data from API
+    //States
+    const [fetchedName, setFetchedName] = useState<string>("");
     const [fetchedPrice, setFetchedPrice] = useState<number>(0);
-    const FetchPromise = fetch('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
-    const dataPromise = FetchPromise.then((response) => response.json());
-    const assetPrice = dataPromise.then((data) => setFetchedPrice(data.price));
+    const [fetchedSymbol, setFetchedSymbol] = useState<string>("");
 
+    //Behaviors
+    const FetchData = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin');
+    const AssetDataJSON = FetchData.then((response) => response.json());
+    AssetDataJSON.then((data) =>
+    {
+        setFetchedName(data[0].name);
+        setFetchedPrice(data[0].current_price);
+        setFetchedSymbol(data[0].symbol.toUpperCase());
+    });
 
+    //Render
     return (
         <div className="row justify-content-center">
             <div className="col-xl-10 col-xxl-9">
@@ -44,7 +53,7 @@ const AssetOverview: FunctionComponent = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <AssetTableLine name={"Ethereum"} symbol={"ETH"} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
                                 </tbody>
                             </table>
                         </div>
