@@ -1,14 +1,18 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEdit, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+import AssetTableLine from "./AssetTableLine";
 
-interface IProps {
- name: string;
- symbol: string;
- price: number;
-}
 
-const AssetOverview: FunctionComponent<IProps> = ({name, symbol, price}) => {
+const AssetOverview: FunctionComponent = () => {
+
+    //Get price data from API
+    const [fetchedPrice, setFetchedPrice] = useState<number>(0);
+    const FetchPromise = fetch('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
+    const dataPromise = FetchPromise.then((response) => response.json());
+    const assetPrice = dataPromise.then((data) => setFetchedPrice(data.price));
+
+
     return (
         <div className="row justify-content-center">
             <div className="col-xl-10 col-xxl-9">
@@ -40,24 +44,7 @@ const AssetOverview: FunctionComponent<IProps> = ({name, symbol, price}) => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td className="text-truncate">{name}</td>
-                                    <td>{symbol}</td>
-                                    <td className="text-truncate">{price} USDT</td>
-                                    <td>2</td>
-                                    <td>45000 USDT</td>
-                                    <td>19500 USDT</td>
-                                    <td className="text-center">
-                                        <div className="btn-group" role="group">
-                                            <button className="btn btn-primary" type="button">
-                                                <FontAwesomeIcon icon={faEdit} />
-                                            </button>
-                                            <button className="btn btn-danger" type="button">
-                                                <FontAwesomeIcon icon={faTrashAlt} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <AssetTableLine name={"Ethereum"} symbol={"ETH"} price={fetchedPrice} />
                                 </tbody>
                             </table>
                         </div>
