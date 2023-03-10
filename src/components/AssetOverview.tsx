@@ -54,6 +54,23 @@ const AssetOverview: FunctionComponent = () => {
                                 </thead>
                                 <tbody>
                                     <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
+                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
                                 </tbody>
                             </table>
                         </div>
