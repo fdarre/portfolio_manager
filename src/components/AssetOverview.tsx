@@ -1,25 +1,29 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faEdit, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import AssetTableLine from "./AssetTableLine";
 
 
 const AssetOverview: FunctionComponent = () => {
 
     //States
+    const [totalValue, setTotalValue] = useState<number>(0);
     const [fetchedName, setFetchedName] = useState<string>("");
     const [fetchedPrice, setFetchedPrice] = useState<number>(0);
     const [fetchedSymbol, setFetchedSymbol] = useState<string>("");
 
     //Behaviors
-    const FetchData = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin');
-    const AssetDataJSON = FetchData.then((response) => response.json());
-    AssetDataJSON.then((data) =>
-    {
-        setFetchedName(data[0].name);
-        setFetchedPrice(data[0].current_price);
-        setFetchedSymbol(data[0].symbol.toUpperCase());
-    });
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin');
+            const data = await response.json();
+            setFetchedName(data[0].name);
+            setFetchedPrice(data[0].current_price);
+            setFetchedSymbol(data[0].symbol.toUpperCase());
+        };
+        fetchData();
+    }, []);
+
 
     //Render
     return (
@@ -28,6 +32,7 @@ const AssetOverview: FunctionComponent = () => {
                 <div className="card shadow">
                     <div className="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3">
                         <h5 className="display-6 text-nowrap text-capitalize mb-0">Assets overview</h5>
+                        <div className="text-nowrap text-capitalize mb-0">Portfolio value: <span>{totalValue}</span> USDT</div>
                         <div className="input-group input-group-sm w-auto">
                             <button className="btn btn-outline-success btn-sm me-2 rounded-start rounded-end" type="button">
                                 <FontAwesomeIcon icon={faPlus} /> Add
@@ -53,23 +58,6 @@ const AssetOverview: FunctionComponent = () => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
-                                    <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
                                     <AssetTableLine name={fetchedName} symbol={fetchedSymbol} price={fetchedPrice} />
                                 </tbody>
                             </table>
